@@ -16,7 +16,11 @@ extension HiveX on HiveInterface {
       var appDir = await getApplicationDocumentsDirectory();
       path = path_helper.join(appDir.path, subDir);
     }
-
+    if (Platform.isMacOS) {
+      // macos下将目录改为ApplicationSupport
+      var appDir = await getApplicationSupportDirectory();
+      path = path_helper.join(appDir.path, subDir);
+    }
     init(
       path,
       backendPreference: backendPreference,
